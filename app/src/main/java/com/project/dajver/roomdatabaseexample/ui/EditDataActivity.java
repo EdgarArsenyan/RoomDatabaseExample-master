@@ -9,6 +9,7 @@ import com.project.dajver.roomdatabaseexample.R;
 import com.project.dajver.roomdatabaseexample.db.DatabaseHelper;
 import com.project.dajver.roomdatabaseexample.db.model.DataModel;
 
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class EditDataActivity extends AppCompatActivity {
@@ -22,6 +23,7 @@ public class EditDataActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_data);
+        ButterKnife.bind(this);
         setTitle();
         setDescription();
         setDate();

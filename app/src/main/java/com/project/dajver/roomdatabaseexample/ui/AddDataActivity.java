@@ -1,12 +1,17 @@
 package com.project.dajver.roomdatabaseexample.ui;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.project.dajver.roomdatabaseexample.App;
@@ -20,6 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static java.lang.String.valueOf;
 
 
 public class AddDataActivity extends AppCompatActivity {
@@ -32,6 +38,7 @@ public class AddDataActivity extends AppCompatActivity {
     EditText date;
     @BindView(R.id.time)
     EditText time;
+
     private int year;
     private int month;
     private int dayOfMonth;
@@ -42,8 +49,16 @@ public class AddDataActivity extends AppCompatActivity {
     private TimePickerDialog timePickerDialog;
     private String amPm;
     private DatePickerDialog.OnDateSetListener dateSetListener;
+    public TextView priorityText;
+    int color;
 
+    SeekBar seekBar;
 
+    public TextView getPriorityText() {
+        return priorityText;
+    }
+
+    int position = 0;
 
 
     @Override
@@ -51,6 +66,8 @@ public class AddDataActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         ButterKnife.bind(this);
+        priorityText = findViewById(R.id.priority_text);
+        seekBar = findViewById(R.id.seek);
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,9 +78,9 @@ public class AddDataActivity extends AppCompatActivity {
                 datePickerDialog = new DatePickerDialog(AddDataActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        date.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                        date.setText(dayOfMonth + "." + (month + 1) + "." + year);
                     }
-                },year,month,dayOfMonth);
+                }, year, month, dayOfMonth);
 
                 datePickerDialog.show();
 
@@ -92,6 +109,50 @@ public class AddDataActivity extends AppCompatActivity {
                 timePickerDialog.show();
             }
         });
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                position = progress;
+                switch (progress){
+
+                    case 0: priorityText.setText("No Priority");
+                   priorityText.setTextColor(getResources().getColor(R.color.no_priority));
+                   color = (getResources().getColor(R.color.no_priority));
+                    break;
+
+                    case 1: priorityText.setText("Low");
+                        priorityText.setTextColor(getResources().getColor(R.color.low));
+                        color = getResources().getColor(R.color.low);
+
+                        break;
+                    case 2: priorityText.setText("Normal");
+                        priorityText.setTextColor(getResources().getColor(R.color.normal));
+                        color = getResources().getColor(R.color.normal);
+
+                        break;
+                    case 3 : priorityText.setText("High");
+                        priorityText.setTextColor(getResources().getColor(R.color.high));
+                        color = getResources().getColor(R.color.high);
+                        break;
+                    default:
+                        return;
+                }
+
+            }
+
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
     }
 
@@ -106,6 +167,8 @@ public class AddDataActivity extends AppCompatActivity {
         model.setDescription(description.getText().toString());
         model.setDate(date.getText().toString());
         model.setTime(time.getText().toString());
+        model.setPriority(priorityText.getText().toString());
+        model.setColor(color);
         databaseHelper.getDataDao().insert(model);
 
         finish();

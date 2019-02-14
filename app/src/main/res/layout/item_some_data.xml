@@ -67,6 +67,32 @@
                         android:text="TextView"
                         android:paddingLeft="8dp"/>
                 </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:id="@+id/priority"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:text="Priority"
+                        android:layout_marginLeft="8dp"/>
+
+                    <TextView
+                        android:id="@+id/pri"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+
+                        android:text="Priority"
+                        android:layout_marginLeft="36dp"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -86,7 +112,8 @@
         android:id="@+id/edit"
         android:layout_width="24dp"
         android:layout_height="25dp"
-        android:layout_margin="8dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginLeft="8dp"
         android:background="@drawable/edit"
         />
 

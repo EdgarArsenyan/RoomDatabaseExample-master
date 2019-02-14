@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:padding="10dp">
 
+
     <EditText
         android:id="@+id/title"
         android:layout_width="match_parent"
@@ -43,6 +44,36 @@
             android:inputType="textPersonName" />
 
 
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <SeekBar
+
+            android:id="@+id/seek"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:drawingCacheQuality="auto"
+            android:max="3"
+            android:progressDrawable="@drawable/custom_seek"
+            android:thumb="@drawable/cursor" />
+
+        <TextView
+            android:id="@+id/priority_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:text="No Priority"
+            android:textColor="@color/no_priority"
+            android:textSize="18sp"
+ />
+
     </LinearLayout>
 
 
@@ -51,8 +82,10 @@
         android:id="@+id/save"
         android:layout_width="82dp"
         android:layout_height="36dp"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/backin"
         android:onClick="onSaveClick"
         android:text="Save" />
+
+
 </LinearLayout>

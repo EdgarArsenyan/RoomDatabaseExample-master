@@ -1,24 +1,25 @@
 package com.project.dajver.roomdatabaseexample.ui.main.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.project.dajver.roomdatabaseexample.R;
 import com.project.dajver.roomdatabaseexample.db.model.DataModel;
+import com.project.dajver.roomdatabaseexample.ui.AddDataActivity;
 import com.project.dajver.roomdatabaseexample.ui.EditDataActivity;
-import com.project.dajver.roomdatabaseexample.ui.main.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnItemClick;
 
 /**
  * Created by gleb on 11/16/17.
@@ -29,6 +30,7 @@ public class SomeDataRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
     private List<DataModel> dataModels = new ArrayList<>();
     private OnDeleteListener onDeleteListener;
     private Context context;
+    AddDataActivity addDataActivity;
 
 
     public SomeDataRecyclerAdapter(Context context, List<DataModel> dataModels) {
@@ -44,6 +46,7 @@ public class SomeDataRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         final NewsViewHolder viewHolder = (NewsViewHolder) holder;
@@ -51,8 +54,8 @@ public class SomeDataRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
         viewHolder.description.setText(dataModels.get(position).getDescription());
         viewHolder.date.setText(dataModels.get(position).getDate());
         viewHolder.time.setText(dataModels.get(position).getTime());
-
-
+        viewHolder.priorStatus.setText(dataModels.get(position).getPriority());
+        viewHolder.view.setBackgroundColor(dataModels.get(position).getColor());
 
         viewHolder.edit.setOnClickListener(new View.OnClickListener() {
     @Override
@@ -86,6 +89,13 @@ public class SomeDataRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
         public TextView delete;
         @BindView(R.id.edit)
         public TextView edit;
+        @BindView(R.id.pri)
+        public TextView priorStatus;
+        @BindView(R.id.view)
+        public LinearLayout view;
+
+
+
 
 
         public NewsViewHolder(View itemView) {
